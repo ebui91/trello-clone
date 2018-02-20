@@ -1,0 +1,1 @@
+SELECT * FROM tasks WHERE board_id= $1;

@@ -13,7 +13,7 @@ export default(
       <Route component={Landing} exact path='/'/>
       <Route component={LoginPage} path='/login'/>
       <Route component={AllBoards} path='/boards'/>
-      <Route component={Board} path='/board'/>
+      <Route component={Board} path='/board/:id'/>
     </Switch>
   </BrowserRouter>
 )

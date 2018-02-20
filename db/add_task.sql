@@ -1,0 +1,1 @@
+INSERT INTO tasks (board_id, task) VALUES ($1, $2);

@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+import { connect } from 'react-redux'
+import { reqUser, login } from '../../redux/reducer';
 
-class Landing extends Component{
-    componentWillMount(){
-        axios.get('http://localhost:3001/api/test').then(response=> {
-            console.log(response.data);
-        })
+class Landing extends Component{    
+    componentDidMount(){
+        this.props.reqUser;
     }
+    
     render(){
         return(
-            <div>Landing</div>
+            <div>
+                <h1>Trello</h1>
+                <button onClick={()=> this.props.login()}>LOGIN</button>
+            </div>
         )
     }
 }
 
-export default Landing;
+const mapStateToProps= (state)=> {
+    const { user, logged }= state;
+    return { user, logged };
+};
+
+export default connect(mapStateToProps, { reqUser, login })(Landing);
