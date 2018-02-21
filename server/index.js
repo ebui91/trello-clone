@@ -88,13 +88,13 @@ passport.use(
 
 // Endpoints
 app.get('/api/boards/:id', controller.getBoards);
-// app.get('/api/fuck', (req, res, next)=> {
-//   res.json('what the fuck bro') 
-// })
+app.get('/api/list/:id', controller.getList);
+app.post('/api/list/:id', controller.addToList);
 
 app.post('/api/create/board/:id', controller.createBoard);
 app.post('/api/tasks', controller.addTask);
 app.get('/api/tasks/:id', controller.getTasks);
+app.delete('/api/tasks/:id', controller.deleteTask);
 
 // Server Listening
 app.listen(port, ()=> {

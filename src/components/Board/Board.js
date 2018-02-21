@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Task from '../Tasks/Task';
+import './Board.css';
 
 class Board extends Component{
     constructor(){
@@ -9,23 +11,30 @@ class Board extends Component{
             taskList: [],
             text: ""
         }
+        this.getTasks= this.getTasks.bind(this);
         this.addTask= this.addTask.bind(this);
         this.handleText= this.handleText.bind(this);
     }
 
     componentWillMount(){
+        this.getTasks();
+    }
+
+    componentDidUpdate(){
+        this.getTasks();
+    }
+
+    getTasks(){
         axios.get(`/api/tasks/${this.props.match.params.id}`).then(response=> {
-            this.setState({ taskList: response.data });
+            this.setState({ text: "", taskList: response.data });
         })
     }
 
     addTask(){
-        axios.post('/api/tasks/', { board_id: this.props.match.params.id, task: this.state.text }).then(response=> {
+        axios.post('/api/tasks/', { board_id: this.props.match.params.id, name: this.state.text }).then(response=> {
             response.data;
-        })
-        axios.get(`/api/tasks/${this.props.match.params.id}`).then(response=> {
-            this.setState({ taskList: response.data, text: "" });
-        })
+        });
+        this.getTasks();
     }
 
     handleText(input){
@@ -35,15 +44,18 @@ class Board extends Component{
     render(){
         const tasks= this.state.taskList.map((task, i)=> {
             return(
-                <p>{task.task}</p>
+                <Task key={i} taskID={task.id} taskName={task.name} />
             )
         })
         return(
-            <div>
-                BOARD
-                {tasks}
-                <input onChange={(e)=> this.handleText(e.target.value)} type="text"></input>
-                <button onClick={()=> this.addTask() }>Add Task</button>
+            <div className='board-main-container'>
+                <h1>BOARD NAME HERE</h1>
+                <input className='task-input'onChange={(e)=> this.handleText(e.target.value)} type="text"></input>
+                <button className='task-submit-btn' onClick={()=> this.addTask() }>Add Task</button>
+
+                <div className='board-tasks-container'>
+                    {tasks}
+                </div>
             </div>
         )
     }

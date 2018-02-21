@@ -1,0 +1,1 @@
+SELECT * FROM items WHERE task_id= $1;

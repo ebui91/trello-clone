@@ -4,7 +4,8 @@ import axios from 'axios';
 const initialState= {
     user: {},
     logged: false,
-    boardsList: []
+    boardsList: [],
+    taskList: []
 }
 
 
@@ -13,6 +14,8 @@ const REQ_USER= "REQ_USER";
 const LOGIN= "LOGIN";
 const GET_BOARDS= "GET_BOARDS";
 // const CREATE_BOARD= "CREATE_BOARD";
+const DELETE_TASK= "DELETE_TASK";
+
 
 // Reducer
 export default function reducer(state= initialState, action){
@@ -28,6 +31,10 @@ export default function reducer(state= initialState, action){
             return Object.assign({}, state, { isLoading: true });
         case GET_BOARDS + "_FULFILLED":
             return Object.assign({}, state, { isLoading: false, boardsList: action.payload });
+        case DELETE_TASK + "_PENDING": 
+            return Object.assign({}, state, { isLoading: true });
+        case DELETE_TASK + "_FULFILLED":
+            return Object.assign({}, state, { isLoading: false, taskList: action.payload });
         default:
             return state;
     }
@@ -38,9 +45,7 @@ export default function reducer(state= initialState, action){
 export function reqUser(){
     return {
         type: REQ_USER,
-        payload: axios.get('/me').then(response=> { 
-            return response.data;
-        })
+        payload: axios.get('/me').then(response=> response.data)
     }
 }
 
@@ -54,9 +59,7 @@ export function login(){
 export function getBoards(){
     return{
         type: GET_BOARDS,
-        payload: axios.get(`/api/boards/5`).then(response=> {
-            return response.data;
-        })
+        payload: axios.get(`/api/boards/5`).then(response=> response.data)
     }
 }
 
@@ -66,3 +69,11 @@ export function getBoards(){
 //         payload: axios.post('/api/create-board')
 //     }
 // }
+
+export function deleteTask(id){
+    return{
+        type: DELETE_TASK,
+        payload: axios.delete(`/api/tasks/${id}`).then(response=> response.data)
+    }
+}
+

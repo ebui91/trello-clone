@@ -5,14 +5,26 @@ module.exports= {
     },
     createBoard: (req, res, next)=> {
         const dbInstance= req.app.get('db');
-        dbInstance.create_board([req.params.id, "TEST"]).then(boards=> res.status(200).json(boards));
+        dbInstance.create_board([req.params.id, "NEW BOARD"]).then(boards=> res.status(200).json(boards));
     },
     addTask: (req, res, next)=> {
         const dbInstance= req.app.get('db');
-        dbInstance.add_task([req.body.board_id, req.body.task]).then(task=> res.status(200).json(task));
+        dbInstance.add_task([req.body.board_id, req.body.name]).then(task=> res.status(200).json(task));
     },
     getTasks: (req, res, next)=> {
         const dbInstance= req.app.get('db');
         dbInstance.get_tasks([req.params.id]).then(tasks=> res.status(200).json(tasks));
-    }
+    },
+    deleteTask: (req, res, next)=> {
+        const dbInstance= req.app.get('db');
+        dbInstance.delete_task([req.params.id]).then(tasks=> res.status(200).json(tasks));
+    },
+    getList: (req, res, next)=> {
+        const dbInstance= req.app.get('db');
+        dbInstance.get_list([req.params.id]).then(list=> res.status(200).json(list));
+    },
+    addToList: (req, res, next)=> {
+        const dbInstance= req.app.get('db');
+        dbInstance.add_to_list([req.params.id, req.body.item_text]).then(list=> res.status(200).json(list));
+    }    
 }

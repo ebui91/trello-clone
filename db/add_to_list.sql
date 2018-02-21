@@ -1,0 +1,1 @@
+INSERT INTO items (task_id, item_text) VALUES ($1, $2);
