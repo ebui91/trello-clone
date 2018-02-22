@@ -1,0 +1,133 @@
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes bounce-1{
+    0%   {height: 0px;}
+    25%  {height: 50px;}
+    50%  {height: 150px;}
+    100% {height: 25px;}
+}
+
+@-webkit-keyframes bounce-2{
+    0%   {height: 0px;}
+    25%  {height: 25px;}
+    50%  {height: 75px;}
+    100% {height: 15px;}
+}
+
+@-webkit-keyframes bounce-3{
+    0%   {height: 0px;}
+    25%  {height: 15px;}
+    50%  {height: 50px;}
+    100% {height: 5px;}
+}
+
+/* Standard syntax */
+@keyframes bounce-1{
+    0%   {height: 0px;}
+    25%  {height: 50px;}
+    50%  {height: 100px;}
+    100% {height: 25px;}
+}
+
+@keyframes bounce-2{
+    0%   {height: 0px;}
+    25%  {height: 25px;}
+    50%  {height: 75px;}
+    100% {height: 15px;}
+}
+
+@keyframes bounce-3{
+    0%   {height: 0px;}
+    25%  {height: 15px;}
+    50%  {height: 50px;}
+    100% {height: 5px;}
+}
+
+.logo-container{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bars-container{
+    height: 110px;
+    width: 110px;
+    display: flex; 
+    justify-content: space-around;
+    align-items: flex-end;
+    margin-right: 1rem;
+}
+
+.bar{
+    width: 33px;
+    display: flex;
+    flex-direction: column-reverse;
+    border-radius: 5px;
+}
+
+.bar-1 {
+    background-color: #FF005D;
+    -webkit-animation-name: bounce-1;
+    -webkit-animation-duration: 4s; 
+    animation: bounce-1 2s infinite;
+}
+
+.bar-2 {
+    background-color: #5BFBFF;
+    -webkit-animation-name: bounce-2;
+    -webkit-animation-duration: 4s; 
+    animation: bounce-2 2s infinite;
+    animation-delay: 2s;
+}
+
+.bar-3 {
+    background-color: #FFFA00;
+    -webkit-animation-name: bounce-3;
+    -webkit-animation-duration: 4s; 
+    animation: bounce-3 2s infinite;
+    animation-delay: 4s;
+}
+
+.landing-logo-text{
+    font-family: "Pacifico", cursive;
+    font-size: 5rem;
+    color: #FFF;
+    opacity: 0.9;
+    margin-bottom: 10px;
+}
+
+.landing-container{
+    background: #026AA7;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-btn{
+    height: 36px;
+    width: 100px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #026AA7;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+}
+
+.login-btn:hover{
+    transition: all ease 0.3s;
+    cursor: pointer;
+    background: #FFF;
+    color: #35B4FF;
+}
