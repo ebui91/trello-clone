@@ -5,7 +5,8 @@ const initialState= {
     user: {},
     logged: false,
     boardsList: [],
-    taskList: []
+    taskList: [],
+    createBoardModal: false
 }
 
 
@@ -15,6 +16,7 @@ const LOGIN= "LOGIN";
 const GET_BOARDS= "GET_BOARDS";
 // const CREATE_BOARD= "CREATE_BOARD";
 const DELETE_TASK= "DELETE_TASK";
+const TOGGLE_BOARD_MODAL= "TOGGLE_BOARD_MODAL";
 
 
 // Reducer
@@ -35,6 +37,8 @@ export default function reducer(state= initialState, action){
             return Object.assign({}, state, { isLoading: true });
         case DELETE_TASK + "_FULFILLED":
             return Object.assign({}, state, { isLoading: false, taskList: action.payload });
+        case TOGGLE_BOARD_MODAL:
+            return Object.assign({}, state, { createBoardModal: !state.createBoardModal });
         default:
             return state;
     }
@@ -74,6 +78,12 @@ export function deleteTask(id){
     return{
         type: DELETE_TASK,
         payload: axios.delete(`/api/tasks/${id}`).then(response=> response.data)
+    }
+}
+
+export function toggleBoardModal(){
+    return{
+        type: TOGGLE_BOARD_MODAL
     }
 }
 

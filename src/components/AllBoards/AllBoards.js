@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reqUser, getBoards } from '../../redux/reducer';
+import { reqUser, getBoards, toggleBoardModal } from '../../redux/reducer';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './AllBoards.css';
+
+import BoardModal from '../BoardModal/BoardModal';
 
 class AllBoards extends Component{
     constructor(props){
         super(props);
 
+        this.state= {
+            modal: false
+        }
+        this.toggleModal= this.toggleModal.bind(this);
         this.createBoard= this.createBoard.bind(this);
     }
     componentWillMount(){
@@ -17,6 +23,10 @@ class AllBoards extends Component{
 
     componentDidMount(){
         this.props.getBoards();
+    }
+
+    toggleModal(){
+        this.setState({ modal: !this.state.modal });
     }
 
     createBoard(){
@@ -42,11 +52,17 @@ class AllBoards extends Component{
                 <div className='all-boards-container'>
                     { boards }
 
-                    <button onClick={()=> {this.createBoard()}}>
-                        <i className="fas fa-plus"></i>
-                    </button>
-                    <p>Create New Board</p>
+                    {   
+                        !this.props.createBoardModal ? 
+                        <div onClick={()=> {this.props.toggleBoardModal()}} className="create-board-container">
+                            <p><span><i className="fas fa-plus"></i>&nbsp;</span> Create new board...</p>
+                        </div>    
+                        :
+                        <BoardModal style={{ zIndex:"9" }} />
+                    }
                 </div>
+
+                
             </div>
         )
     }
@@ -54,8 +70,8 @@ class AllBoards extends Component{
 
 
 const mapStateToProps= (state)=> {
-    const { user, logged, boardsList }= state;
-    return { user, logged, boardsList };
+    const { user, logged, boardsList, createBoardModal }= state;
+    return { user, logged, boardsList, createBoardModal };
 }
 
-export default connect(mapStateToProps, { reqUser, getBoards })(AllBoards);
+export default connect(mapStateToProps, { reqUser, getBoards, toggleBoardModal })(AllBoards);
