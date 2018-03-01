@@ -12,10 +12,12 @@ class AllBoards extends Component{
         super(props);
 
         this.state= {
-            modal: false
+            modal: false,
+            boardTitle: ""
         }
         this.toggleModal= this.toggleModal.bind(this);
         this.createBoard= this.createBoard.bind(this);
+        this.handleInput= this.handleInput.bind(this);
     }
     componentWillMount(){
         this.props.reqUser();
@@ -29,11 +31,16 @@ class AllBoards extends Component{
         this.setState({ modal: !this.state.modal });
     }
 
+    handleInput(input){
+        this.setState({ boardTitle: input });
+    }
+
     createBoard(){
-        axios.post(`/api/create/board/${this.props.user.id}`).then(response=> {
+        axios.post('/api/create/board', { id: this.props.user.id, title: this.state.boardTitle }).then(response=> {
             response.data;
         })
         this.props.getBoards();
+        this.props.toggleBoardModal();
     }
 
     render(){
@@ -58,7 +65,7 @@ class AllBoards extends Component{
                             <p><span><i className="fas fa-plus"></i>&nbsp;</span> Create new board...</p>
                         </div>    
                         :
-                        <BoardModal style={{ zIndex:"9" }} />
+                        <BoardModal handleInput={this.handleInput} boardTitle={this.state.boardTitle} createBoard={this.createBoard} style={{ zIndex:"9" }} />
                     }
                 </div>
 

@@ -90,8 +90,9 @@ passport.use(
 app.get('/api/boards/:id', controller.getBoards);
 app.get('/api/list/:id', controller.getList);
 app.post('/api/list/:id', controller.addToList);
+app.delete('/api/list/:id', controller.removeFromList);
 
-app.post('/api/create/board/:id', controller.createBoard);
+app.post('/api/create/board', controller.createBoard);
 app.post('/api/tasks', controller.addTask);
 app.get('/api/tasks/:id', controller.getTasks);
 app.delete('/api/tasks/:id', controller.deleteTask);

@@ -1,1 +1,1 @@
-INSERT INTO tasks (board_id, task) VALUES ($1, $2);
+INSERT INTO tasks (board_id, name) VALUES ($1, $2);

@@ -16,3 +16,21 @@
     height: 40px;
     width: 65px;
 }
+
+.images-container{
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: rgba(0,0,0,0.6);
+    min-height: 100vh;
+    width: 325px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: space-around;
+    flex-wrap: wrap;
+}
+
+.image-preview-container:hover{
+    cursor: pointer;
+}

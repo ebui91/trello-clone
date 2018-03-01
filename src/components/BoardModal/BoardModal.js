@@ -6,20 +6,27 @@ import './BoardModal.css';
 
 const BoardModal= (props)=> {
         return(
-            <div className="board-modal-container">
+            <div className="board-container" style={{ display:"flex", flexDirection:"column", justifyContent:"space-around" }}>
                 <div className="board-modal-header">
-                    <p>Create Board</p>
-                    <p onClick={()=> props.toggleBoardModal()}>X</p>
-                    <hr style={{ width:"80%" }}/>
+                    <p style={{ margin: "auto" }}>Create Board</p>
+
+                    <button onClick={()=> props.toggleBoardModal()} className="close-modal-btn" style={{ background:"#FFF", border:"none" }}>
+                        <i className="fas fa-times"></i>
+                    </button>
                 </div>
+
+                <hr style={{ width:"90%", borderColor:"#777", borderWidth:"0.5px" }}/>
 
                 <div className="board-modal-body">
                     <h4>Title</h4>
-                    <input type="text"></input>
+                    <input onChange={(e)=> props.handleInput(e.target.value)} className="board-title-input" type="text"></input>
                 </div>
 
                 <div className="board-modal-footer">
-                    <button>CREATE</button>
+                    <button onClick={()=> {
+                        props.createBoard();
+                        props.handleInput("");
+                    }} className="board-modal-create-btn">CREATE</button>
                 </div>
             </div>
         )

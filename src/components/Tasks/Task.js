@@ -50,7 +50,7 @@ class Task extends Component{
     render(){
         const items= this.state.itemList.map((item, i)=> {
             return(
-                <ListItem key={i} text={item.item_text} />
+                <ListItem key={i} item_id={item.id} text={item.item_text} />
             )
         });
 

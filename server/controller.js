@@ -5,7 +5,7 @@ module.exports= {
     },
     createBoard: (req, res, next)=> {
         const dbInstance= req.app.get('db');
-        dbInstance.create_board([req.params.id, "NEW BOARD"]).then(boards=> res.status(200).json(boards));
+        dbInstance.create_board([req.body.id, req.body.title]).then(boards=> res.status(200).json(boards));
     },
     addTask: (req, res, next)=> {
         const dbInstance= req.app.get('db');
@@ -26,5 +26,9 @@ module.exports= {
     addToList: (req, res, next)=> {
         const dbInstance= req.app.get('db');
         dbInstance.add_to_list([req.params.id, req.body.item_text]).then(list=> res.status(200).json(list));
+    },
+    removeFromList: (req, res, next)=> {
+        const dbInstance= req.app.get('db');
+        dbInstance.remove_from_list([req.params.id]).then(list=> res.status(200).json(list));
     }    
 }

@@ -1,7 +1,54 @@
-.board-modal-container{
-    height: 12rem;
-    width: 25rem;
+.board-modal-header{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    color: #777;
+}
+
+.board-modal-create-btn{
+    height: 2rem;
+    width: 5rem;
+    font-size: 14px;
+    background: #5AAC44;
+    color: #FFF;
     border: none;
     border-radius: 3px;
-    background: red;
+    margin: auto;
+    padding: 5px;
+}
+
+.board-modal-create-btn:hover{
+    transition: all ease 0.5s;
+    cursor: pointer;
+    background: #61E23D;
+}
+
+.board-modal-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+}
+
+.board-title-input{
+    height: 24px;
+    background: #E2E4E6;
+    outline: none;
+    border: solid 1px #E2E4E6;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.close-modal-btn{
+    position: absolute;
+    margin: 0px;
+    color: #777;
+}
+
+.close-modal-btn:hover{
+    transition: all ease 0.3s;
+    cursor: pointer;
+    color: #333;
 }
