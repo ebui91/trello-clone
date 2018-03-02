@@ -50,8 +50,9 @@ class Board extends Component{
     getImages(){
         axios.get('https://picsum.photos/list').then(images=> {
             var randoms= [];
+
             for(let i=0; i<=25; i++){
-                randoms.push(images.data[i]);
+                randoms.push(images.data[Math.floor(Math.random()*(images.data.length))]);
             }
             this.setState({ imageList: randoms });
         });
@@ -70,12 +71,16 @@ class Board extends Component{
 
         const images= this.state.imageList.map((image, i)=> {
             return(
-                <div onClick={()=> this.selectImg(`https://picsum.photos/1280/800/?image=${image.id}`) } className="image-preview-container" key={i} style={{
+                <div onClick={()=> this.selectImg(`https://picsum.photos/1920/1200/?image=${image.id}`) } className="image-preview-container" key={i} style={{
                     backgroundImage: `url(https://picsum.photos/150/150/?image=${image.id})`,
                     height: "150px",
                     width: "150px",
                     margin: "5px"
-                }}></div>
+                }}>
+                    <div className="select-img">
+                        <p>Select Image</p>
+                    </div>
+                </div>
             )
         });
 
@@ -86,7 +91,7 @@ class Board extends Component{
                 <button className='task-submit-btn' onClick={()=> this.addTask() }>Add Task</button>
 
                 <div className='board-tasks-container'>
-                    {tasks}
+                    { tasks }
                 </div>
 
                 <div className="images-container">
