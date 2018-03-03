@@ -20,12 +20,12 @@
 }
 
 .images-container{
-    position: fixed;
+    transition: all 1.5s;
+    position: absolute;
     top: 0;
     right: 0;
     background: rgba(0,0,0,0.6);
     height: 100vh;
-    width: 325px;
     padding: 10px;
     display: flex;
     justify-content: space-around;

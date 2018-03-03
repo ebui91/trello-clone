@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Task from '../Tasks/Task';
+import Navbar from '../Navbar/Navbar';
 import './Board.css';
 
 class Board extends Component{
@@ -11,11 +12,15 @@ class Board extends Component{
             taskList: [],
             text: "",
             imageList: [],
-            selectedImg: ""
+            selectedImg: "",
+            drawerHidden: true,
+            drawerClosed: "0px",
+            drawerOpen: "325px"
         }
         this.getTasks= this.getTasks.bind(this);
         this.addTask= this.addTask.bind(this);
         this.handleText= this.handleText.bind(this);
+        this.toggleDrawer= this.toggleDrawer.bind(this);
         this.getImages= this.getImages.bind(this);
         this.selectImg= this.selectImg.bind(this);
     }
@@ -45,6 +50,10 @@ class Board extends Component{
 
     handleText(input){
         this.setState({ text: input })
+    }
+    
+    toggleDrawer(){
+        this.setState({ drawerHidden: !this.state.drawerHidden });
     }
 
     getImages(){
@@ -86,16 +95,32 @@ class Board extends Component{
 
         return(
             <div className='board-main-container' style={{ height:"100vh", width:"100%", backgroundImage:`url(${this.state.selectedImg})`, backgroundSize:"cover", backgroundPosition:"center", backgroundRepeat:"no-repeat" }}>
-                <h1>BOARD NAME HERE</h1>
+                <Navbar />
+
+                <div>
+                    <h1>BOARD NAME HERE</h1>
+                    {
+                        this.state.drawerHidden ? 
+                        <div>
+                        <p onClick={()=> this.toggleDrawer()}>Change Background</p>
+                        
+                        <div className="images-container" style={{ width:`${this.state.drawerClosed}` }}>
+                            <p onClick={()=> this.toggleDrawer()}>Hide</p>                
+                            { images }
+                        </div></div>
+                        :
+                        <div className="images-container" style={{ width:`${this.state.drawerOpen}` }}>
+                            <p onClick={()=> this.toggleDrawer()}>Hide</p>                
+                            { images }
+                        </div>
+                    }
+                </div>
+
                 <input className='task-input'onChange={(e)=> this.handleText(e.target.value)} type="text"></input>
                 <button className='task-submit-btn' onClick={()=> this.addTask() }>Add Task</button>
 
                 <div className='board-tasks-container'>
                     { tasks }
-                </div>
-
-                <div className="images-container">
-                    { images }
                 </div>
             </div>
         )
