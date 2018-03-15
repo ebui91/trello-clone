@@ -98,6 +98,9 @@ app.post('/api/tasks', controller.addTask);
 app.get('/api/tasks/:id', controller.getTasks);
 app.delete('/api/tasks/:id', controller.deleteTask);
 
+app.post('/api/background', controller.setBackground);
+app.get('/api/background/:id', controller.getBackground);
+
 // Server Listening
 app.listen(port, ()=> {
     console.log(`Server is listening on port: ${port}`);

@@ -1,0 +1,1 @@
+SELECT background_url FROM boards WHERE id = $1;

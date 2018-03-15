@@ -12,6 +12,7 @@ class Board extends Component{
             taskList: [],
             text: "",
             imageList: [],
+            background: "",
             selectedImg: "",
             drawerHidden: true,
             drawerClosed: "0px",
@@ -23,9 +24,11 @@ class Board extends Component{
         this.toggleDrawer= this.toggleDrawer.bind(this);
         this.getImages= this.getImages.bind(this);
         this.selectImg= this.selectImg.bind(this);
+        this.getBackground = this.getBackground.bind(this);
     }
 
     componentDidMount(){
+        this.getBackground();
         this.getTasks();
         this.getImages();
         this.setState({ text: "" });
@@ -67,8 +70,13 @@ class Board extends Component{
         });
     }
 
+    getBackground(){
+        axios.get(`/api/background/${this.props.match.params.id}`).then(response => {console.log(response.data); this.setState({ background: response.data[0].background_url })});
+    }
+
     selectImg(img){
-        this.setState({ selectedImg: img });
+        axios.post('/api/background', { board_id: this.props.match.params.id, url: img });
+        this.getBackground();
     }
 
     render(){
@@ -94,7 +102,7 @@ class Board extends Component{
         });
 
         return(
-            <div className='board-main-container' style={{ height:"100vh", width:"100%", backgroundImage:`url(${this.state.selectedImg})`, backgroundSize:"cover", backgroundPosition:"center", backgroundRepeat:"no-repeat" }}>
+            <div className='board-main-container' style={{ height:"100vh", width:"100%", backgroundImage:`url(${this.state.background})`, backgroundSize:"cover", backgroundPosition:"center", backgroundRepeat:"no-repeat" }}>
                 <Navbar />
 
                 <div>
